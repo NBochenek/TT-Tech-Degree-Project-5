@@ -34,7 +34,7 @@
         <h2>Projects</h2>
         <div id="project-list">
             <div id="project1" class="a-project">
-                <h3><a href=" "{{url_for("detail", id=project.id) }}> {{ project.title }} </a></h3>
+                <h3><a href="{{ url_for('detail', id=project.id) }}"> {{ project.title }} </h3>
                 <a href="{{ project.link }}" class="github-btn">
                     <i class="fab fa-github"></i>
                     View on GitHub

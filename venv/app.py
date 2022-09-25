@@ -15,7 +15,7 @@ def about():
 
 @app.route("/projects/new", methods = ["GET", "POST"])
 def new():
-    if request.form:  #Unsure if these are actually being created.
+    if request.form:
         new_project = Project(title=request.form["title"],
                               completion=request.form["date"],description=request.form["desc"],
                               skills=request.form["skills"], link=request.form["github"])
@@ -25,16 +25,29 @@ def new():
     return render_template("projectform.html")
 
 @app.route("/projects/<id>")
-def detail():
-    return render_template("detail.html", project=project, projects=projects)
+def detail(id):
+    project_detail = Project.query.get(id)
+    return render_template("detail.html", project_detail = project_detail)
 
-@app.route("/projects/<id>/edit")
-def edit():
-    pass
+@app.route("/projects/<id>/edit", methods= ["GET", "POST"])
+def edit(id):
+    project_detail = Project.query.get(id)
+    if request.form:
+        project_detail.title = request.form["title"]
+        project_detail.completion = request.form["date"]
+        project_detail.description = request.form["desc"]
+        project_detail.skills = request.form["skills"]
+        project_detail.link = request.form["github"]
+        db.session.commit()
+        return redirect(url_for("index"))
+    return render_template("editproject.html", project_detail=project_detail)
 
 @app.route("/projects/<id>/delete")
-def delete():
-    pass
+def delete(id):
+    project_detail = Project.query.get(id)
+    db.session.delete(project_detail)
+    db.session.commit()
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     db.create_all()
