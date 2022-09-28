@@ -4,7 +4,7 @@
     <section class="header">
         <h1>Nicholas Bochenek</h1>
         <p>Inspired by logic.</p>
-        <img src="https://cdn.pixabay.com/photo/2016/11/29/13/14/attractive-1869761_1280.jpg" alt="Headshot of myself">
+        <img src="https://cdn.pixabay.com/photo/2022/04/20/16/25/computer-7145572_960_720.jpg" alt="Keyboard with human cutout.">
     </section>
     <section id="about">
         <h2>About Me</h2>
@@ -28,11 +28,11 @@
         </ul>
     </section>
     <section id="projects">
-        {% for project in projects %}
         <div id="triangle3"></div>
         <i class="fas fa-file-code"></i>
         <h2>Projects</h2>
         <div id="project-list">
+            {% for project in projects %}
             <div id="project1" class="a-project">
                 <h3><a href="{{ url_for('detail', id=project.id) }}"> {{ project.title }} </h3>
                 <a href="{{ project.link }}" class="github-btn">
@@ -49,17 +49,14 @@
 
             </div>
         </div>
-        {% endfor %}
+            {% endfor %}
         <div id="triangle4"></div>
     </section>
     <section id="contact">
         <i class="fas fa-paper-plane"></i>
         <h2>Contact Me</h2>
         <p>
-            Pastry wafer chocolate cake caramels.
-            Gummi bears pudding sugar plum macaroon.
-            Cake tart apple pie soufflé sweet sweet.
-            Topping bear claw lemon drops gingerbread biscuit pudding fruitcake icing chocolate bar.
+
         </p>
         <p>
             <i class="fas fa-envelope"></i>
