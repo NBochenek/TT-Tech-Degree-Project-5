@@ -1,0 +1,1 @@
+This project contains all the elements necessary to generate a portfolio website for myself. Using it, you can browse the site and look at my project. In addition, users are able to add, edit, or delete projects from the attached database.
