@@ -11,10 +11,12 @@ def index():
 
 @app.route("/#about")
 def about():
-    return render_template("about.html")
+    projects = Project.query.all()
+    return render_template("about.html", projects=projects)
 
 @app.route("/projects/new", methods = ["GET", "POST"])
 def new():
+    projects = Project.query.all()
     if request.form:
         new_project = Project(title=request.form["title"],
                               completion=request.form["date"],description=request.form["desc"],
@@ -22,15 +24,17 @@ def new():
         db.session.add(new_project)
         db.session.commit()
         return redirect(url_for("index"))
-    return render_template("projectform.html")
+    return render_template("projectform.html", projects=projects)
 
 @app.route("/projects/<id>")
 def detail(id):
+    projects = Project.query.all()
     project_detail = Project.query.get(id)
-    return render_template("detail.html", project_detail = project_detail)
+    return render_template("detail.html", project_detail = project_detail, projects=projects)
 
 @app.route("/projects/<id>/edit", methods= ["GET", "POST"])
 def edit(id):
+    projects = Project.query.all()
     project_detail = Project.query.get(id)
     if request.form:
         project_detail.title = request.form["title"]
@@ -40,10 +44,11 @@ def edit(id):
         project_detail.link = request.form["github"]
         db.session.commit()
         return redirect(url_for("index"))
-    return render_template("editproject.html", project_detail=project_detail)
+    return render_template("editproject.html", project_detail=project_detail, projects=projects)
 
 @app.route("/projects/<id>/delete")
 def delete(id):
+    projects = Project.query.all()
     project_detail = Project.query.get(id)
     db.session.delete(project_detail)
     db.session.commit()
