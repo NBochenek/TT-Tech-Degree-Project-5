@@ -2,3 +2,7 @@
 *./.Python
 .idea
 .venv
+include
+__pycache__
+Scripts
+Lib
